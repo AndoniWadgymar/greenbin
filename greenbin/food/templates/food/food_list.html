@@ -1,0 +1,116 @@
+{% extends "food/food_base.html" %}{% load static %}{% block content %}
+<section class="section-food container-vh" id="blur">
+  <div class="container center-text">
+    <h2 class="heading-secondary heading-food">
+      See all the food residual you can reuse
+    </h2>
+  </div>
+  <div class="filter-content">
+    <form method="get" action="{% url 'food:foods' %}">
+      <select name="category" id="category">
+        <option value="">Select an option:</option>
+        <option value="1">Fruits</option>
+        <option value="2">Vegetables</option>
+        <option value="3">Daries</option>
+        <option value="4">Grains</option>
+        <option value="5">Proteins</option>
+        <option value="6">Other</option>
+      </select>
+      <button class="btn-filter">Submit</button>
+    </form>
+    <!-- <div class="dropdown">
+      <input
+        type="text"
+        class="ddt"
+        readonly
+        placeholder="Select an option: "
+      />
+      <div class="option">
+        <div onmouseover="show('Fruits')"><a href=""></a>Fruits</div>
+        <div onmouseover="show('Vegetables')">Vegetables</div>
+        <div onmouseover="show('Daries')">Daries</div>
+        <div onmouseover="show('Grains')">Grains</div>
+        <div onmouseover="show('Proteins')">Proteins</div>
+        <div onmouseover="show('Other')">Other</div>
+      </div>
+    </div>
+    <script>
+      function show(a) {
+        document.querySelector(".ddt").value = a;
+      }
+      let dropdown = document.querySelector(".dropdown");
+      dropdown.addEventListener("click", function () {
+        console.log("click");
+        dropdown.classList.toggle("active");
+      });
+    </script> -->
+    <form method="get" action="{% url 'food:foods' %}">
+      <button class="btn-filter">Clear Filters</button>
+    </form>
+    {% if user.is_superuser %}
+    <form action="{% url 'food:create' %}">
+      <button class="btn-filter">Create</button>
+    </form>
+    {% endif %}
+  </div>
+  {% if foods.count == 0 %}
+  <div class="container-big grid center-text">
+    <h3 class="heading-tertiary">No items found!</h3>
+  </div>
+  {% else %}
+  <div class="container-big grid grid--5-cols scroll">
+    {% for food in foods %}
+    <div class="food">
+      {% if food.image %}
+      <img class="food-img" src="{{food.image.url}}" alt="Food Image" />
+      {% else %}
+      <img
+        class="food-img no-img"
+        src="{% static 'img/noimage.jpg' %}"
+        alt="No Image"
+      />
+      {% endif %}
+      <div class="food-content center-text">
+        <div class="meal-tags">
+          <span class="tag tag--{{ food.category}}">{{ food.category}}</span>
+        </div>
+        <p class="food-title">{{food.name}}</p>
+        <ul class="food-attributes">
+          <li class="food-attribute">
+            <span>Aproximate weight: <strong>{{food.weight}}g</strong> </span>
+          </li>
+          <li class="food-attribute">
+            <form action="{% url 'food:details' food.id %}">
+              <button class="more-info">More Info</button>
+            </form>
+          </li>
+          {% if user.is_superuser %}
+          <li class="food-attribute">
+            <form action="{% url 'food:delete' food.id %}">
+              <button class="delete-food">Delete</button>
+            </form>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+      <!-- <script>
+        function toggle() {
+          var blur = document.body;
+          blur.classList.toggle("active");
+        }
+      </script> -->
+    </div>
+    {% endfor %}
+  </div>
+  <!-- <div class="popup">
+    <h3 class="heading-tertiary">
+      Are you sure you want to delete this element?
+    </h3>
+    <a class="delete-food" href="#" onclick="toggle()">Delete</a>
+    <a class="delete-food" href="javascript:void(0)" onclick="toggle()"
+      >Cancel</a
+    >
+  </div> -->
+  {% endif %}
+</section>
+{% endblock %}

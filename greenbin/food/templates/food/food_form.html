@@ -1,0 +1,24 @@
+{% extends "food/food_base.html" %}{% load static %}{% block content %}
+<section class="food-create-section">
+  <div class="container center-text">
+    <h2 class="heading-create">Create a new food element:</h2>
+    <div class="create-food">
+      <form
+        method="POST"
+        action="{% url 'food:create' %} "
+        id="foodForm"
+        class="food-form"
+        enctype="multipart/form-data"
+      >
+        <!-- Security token -->
+        {% csrf_token %}
+
+        <!-- Using the formset -->
+        {{form}}
+
+        <button type="submit" class="btn btn--form">Create</button>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

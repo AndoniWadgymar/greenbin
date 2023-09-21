@@ -1,0 +1,438 @@
+{% extends "user/user_base.html" %}{% load static %} {% block content %}
+<section class="user-section container-vh">
+  {% load humanize %}
+  <div class="all-user-container">
+    <div class="user-information-container center-text">
+      <div class="circular--portrait">
+        <img
+          src="{{user.profile.profileimg.url}}"
+          alt="{{ user.username }}"
+          accept=".jpg,.jpeg,.png"
+        />
+      </div>
+      <div class="user-info">
+        <div>
+          <label>Full Name:</label>
+          <p>{{user.first_name}} {{user.last_name}}</p>
+        </div>
+        <div>
+          <label>Username:</label>
+          <p>{{user.username}}</p>
+        </div>
+        <div>
+          <label>Email:</label>
+          <p>{{user.email}}</p>
+        </div>
+        {% if user.profile.location %}
+        <div>
+          <label>Location:</label>
+          <p>{{user.profile.location}}</p>
+        </div>
+        {% endif %} {% if user.profile.bio %}
+        <div>
+          <label>Bio:</label>
+          <p style="font-size: 1.8rem">{{user.profile.bio}}</p>
+        </div>
+        {% endif %}
+        <form action="{% url 'user:update'%}">
+          <button type="submit" class="btn btn-edit-profile">
+            Edit Profile
+          </button>
+        </form>
+      </div>
+    </div>
+    <div class="process-sum-container center-text">
+      <p>{{user.profile.processes.count}}</p>
+      <label>Total Processes</label>
+    </div>
+    <div class="process-sum-container center-text process-hours">
+      <p>{{user.profile.total_hours}}</p>
+      <label>Total Time</label>
+    </div>
+    <div class="process-sum-container center-text">
+      <p>{{user.profile.total_weight | intcomma}}g</p>
+      <label>Total Weight</label>
+    </div>
+
+    <div class="graph-container">
+      <!-- Slideshow container -->
+      <div class="slideshow-container">
+        <!-- Full-width images with number and caption text -->
+        <div class="mySlides fade">
+          <form method="get" action="{% url 'user:profile' %}">
+            <select name="filter" id="filter">
+              <option value="">Sort graphs by:</option>
+              <option value="day">Day</option>
+              <option value="week">Week</option>
+              <option value="month">Month</option>
+              <option value="year">Year</option>
+            </select>
+            <select name="type" id="type">
+              <option value="">Get data by:</option>
+              <option value="duration">Duration</option>
+              <option value="weight">Weight</option>
+            </select>
+            <button class="btn-filter">Sort</button>
+          </form>
+          <div class="first-graph">
+            <h1>Title</h1>
+            <canvas id="firstChart"></canvas>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script>
+              const ctx_first = document.getElementById("firstChart");
+
+              new Chart(ctx_first, {
+                type: "bar",
+                data: {
+                  labels: [
+                    {% for date in processes_date_list %}'{{date}}',{% endfor %}
+                  ],
+                  datasets: [
+                    {
+                      label: "#",
+                      data: [
+                        {% for data in processes_data_list %}'{{data}}',{% endfor %}
+                      ],
+                      borderWidth: 1,
+                    },
+                  ],
+                },
+                options: {
+                  scales: {
+                    y: {
+                      beginAtZero: true,
+                    },
+                  },
+                },
+              });
+            </script>
+          </div>
+        </div>
+
+        <div class="mySlides fade">
+          <div class="pie-charts">
+            <div>
+              <h1 class="center-text">Fruit Food Usage</h1>
+              <canvas id="firstPieChart"></canvas>
+              <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+              <script>
+                              const ctx_firstpie = document.getElementById("firstPieChart");
+
+                              new Chart(ctx_firstpie, {
+                                type: "pie",
+                                data: {
+                                  labels: [
+                                    {% for name in food_fruit_name_list %}'{{name}}',{% endfor %}
+                                  ],
+                                  datasets: [
+                                    {
+                                      label: "# of times food processed",
+                                      data: [
+                                        {% for data in food_fruit_data_list %}'{{data}}',{% endfor %}
+                                      ],
+                                      borderWidth: 1,
+                                    },
+                                  ],
+                                },
+                                options: {
+                                  scales: {
+                                    y: {
+                                      beginAtZero: true,
+                                    },
+                                  },
+                                  plugins: {
+                  legend: {
+                    display: false
+                  }
+                }
+
+                                },
+                              });
+              </script>
+            </div>
+            <div>
+              <h1 class="center-text">Vegetables Food Usage</h1>
+              <canvas id="secondPieChart"></canvas>
+              <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+              <script>
+                              const ctx_secondpie = document.getElementById("secondPieChart");
+
+                              new Chart(ctx_secondpie, {
+                                type: "pie",
+                                data: {
+                                  labels: [
+                                    {% for name in food_vegetable_name_list %}'{{name}}',{% endfor %}
+                                  ],
+                                  datasets: [
+                                    {
+                                      label: "# of times food processed",
+                                      data: [
+                                        {% for data in food_vegetable_data_list %}'{{data}}',{% endfor %}
+                                      ],
+                                      borderWidth: 1,
+                                    },
+                                  ],
+                                },
+                                options: {
+                                  scales: {
+                                    y: {
+                                      beginAtZero: true,
+                                    },
+                                  },
+                                  plugins: {
+                  legend: {
+                    display: false
+                  }
+                }
+
+                                },
+                              });
+              </script>
+            </div>
+            <div>
+              <h1 class="center-text">Dairy Food Usage</h1>
+              <canvas id="thirdPieChart"></canvas>
+              <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+              <script>
+                              const ctx_thirdpie = document.getElementById("thirdPieChart");
+
+                              new Chart(ctx_thirdpie, {
+                                type: "pie",
+                                data: {
+                                  labels: [
+                                    {% for name in food_dairy_name_list %}'{{name}}',{% endfor %}
+                                  ],
+                                  datasets: [
+                                    {
+                                      label: "# of times food processed",
+                                      data: [
+                                        {% for data in food_dairy_data_list %}'{{data}}',{% endfor %}
+                                      ],
+                                      borderWidth: 1,
+                                    },
+                                  ],
+                                },
+                                options: {
+                                  scales: {
+                                    y: {
+                                      beginAtZero: true,
+                                    },
+                                  },
+                                  plugins: {
+                  legend: {
+                    display: false
+                  }
+                }
+
+                                },
+                              });
+              </script>
+            </div>
+            <div>
+              <h1 class="center-text">Grains Food Usage</h1>
+              <canvas id="fourthPieChart"></canvas>
+              <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+              <script>
+                              const ctx_fourthpie = document.getElementById("fourthPieChart");
+
+                              new Chart(ctx_fourthpie, {
+                                type: "pie",
+                                data: {
+                                  labels: [
+                                    {% for name in food_grain_name_list %}'{{name}}',{% endfor %}
+                                  ],
+                                  datasets: [
+                                    {
+                                      label: "# of times food processed",
+                                      data: [
+                                        {% for data in food_grain_data_list %}'{{data}}',{% endfor %}
+                                      ],
+                                      borderWidth: 1,
+                                    },
+                                  ],
+                                },
+                                options: {
+                                  scales: {
+                                    y: {
+                                      beginAtZero: true,
+                                    },
+                                  },
+                                  plugins: {
+                  legend: {
+                    display: false
+                  }
+                }
+
+                                },
+                              });
+              </script>
+            </div>
+            <div>
+              <h1 class="center-text">Protein Food Usage</h1>
+              <canvas id="fifthPieChart"></canvas>
+              <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+              <script>
+                              const ctx_fifthpie = document.getElementById("fifthPieChart");
+
+                              new Chart(ctx_fifthpie, {
+                                type: "pie",
+                                data: {
+                                  labels: [
+                                    {% for name in food_protein_name_list %}'{{name}}',{% endfor %}
+                                  ],
+                                  datasets: [
+                                    {
+                                      label: "# of times food processed",
+                                      data: [
+                                        {% for data in food_protein_data_list %}'{{data}}',{% endfor %}
+                                      ],
+                                      borderWidth: 1,
+                                    },
+                                  ],
+                                },
+                                options: {
+                                  scales: {
+                                    y: {
+                                      beginAtZero: true,
+                                    },
+                                  },
+                                  plugins: {
+                  legend: {
+                    display: false
+                  }
+                }
+
+                                },
+                              });
+              </script>
+            </div>
+            <div>
+              <h1 class="center-text">Other Food Usage</h1>
+              <canvas id="sixthPieChart"></canvas>
+              <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+              <script>
+                              const ctx_sixthpie = document.getElementById("sixthPieChart");
+
+                              new Chart(ctx_sixthpie, {
+                                type: "pie",
+                                data: {
+                                  labels: [
+                                    {% for name in food_other_name_list %}'{{name}}',{% endfor %}
+                                  ],
+                                  datasets: [
+                                    {
+                                      label: "# of times food processed",
+                                      data: [
+                                        {% for data in food_other_data_list %}'{{data}}',{% endfor %}
+                                      ],
+                                      borderWidth: 1,
+                                    },
+                                  ],
+                                },
+                                options: {
+                                  scales: {
+                                    y: {
+                                      beginAtZero: true,
+                                    },
+                                  },
+                                  plugins: {
+                  legend: {
+                    display: false
+                  }
+                }
+
+                                },
+                              });
+              </script>
+            </div>
+          </div>
+        </div>
+
+        <div class="mySlides fade">
+          <div class="effects">
+            <h1 class="co2-heading center-text">
+              ¿A qué equivalen {{user.profile.total_methane | intcomma}} ml de
+              CH<sup>4</sup>
+            </h1>
+            <div class="co2-comparison">
+              <div class="co2-element">
+                <ion-icon name="car-outline"></ion-icon>
+                <p>
+                  <strong>{{user.profile.total_km | intcomma}}km</strong>
+                  recorridos en un coche promedio
+                </p>
+              </div>
+              <div class="co2-element">
+                <ion-icon name="cloud-outline"></ion-icon>
+                <p>
+                  <strong>{{user.profile.total_air | intcomma}} días</strong> de
+                  oxigeno para un humano.
+                </p>
+              </div>
+              <div class="co2-element">
+                <ion-icon name="flash-outline"></ion-icon>
+                <p>
+                  <strong
+                    >{{user.profile.total_energy | intcomma}} horas</strong
+                  >
+                  de recarga de telefonos.
+                </p>
+              </div>
+              <div class="co2-element">
+                <ion-icon name="bonfire-outline"></ion-icon>
+                <p>
+                  <strong>{{user.profile.total_wood | intcomma}} kg</strong> de
+                  madera quemada
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br />
+
+      <!-- The dots/circles -->
+      <div style="text-align: center">
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+      </div>
+      <script>
+        let slideIndex = 1;
+        showSlides(slideIndex);
+
+        // Next/previous controls
+        function plusSlides(n) {
+          showSlides((slideIndex += n));
+        }
+
+        // Thumbnail image controls
+        function currentSlide(n) {
+          showSlides((slideIndex = n));
+        }
+
+        function showSlides(n) {
+          let i;
+          let slides = document.getElementsByClassName("mySlides");
+          let dots = document.getElementsByClassName("dot");
+          if (n > slides.length) {
+            slideIndex = 1;
+          }
+          if (n < 1) {
+            slideIndex = slides.length;
+          }
+          for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+          }
+          for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+          }
+          slides[slideIndex - 1].style.display = "block";
+          dots[slideIndex - 1].className += " active";
+        }
+      </script>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

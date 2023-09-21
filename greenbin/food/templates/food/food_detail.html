@@ -1,0 +1,28 @@
+{% extends "food/food_base.html" %}{% load static %}{% block content %}
+<div>{% block title %}{{food.name}}{% endblock %}</div>
+<section class="section-food-details">
+  <div class="container">
+    <div class="nutrition">
+      <div class="nutrition-heading center-text">
+        <h2 class="heading-secondary">{{food.name}} Nutritional Components</h2>
+      </div>
+      <div class="grid grid--2-cols">
+        {% for classes, nutrient_elements in zippedList %}
+        <div class="nutrition-element center-text">
+          <div class="nutrition-class">
+            <h4 class="nutrition-element-heading">{{classes}}</h4>
+          </div>
+          <div class="nutrition-components">
+            <ul>
+              {% for key, value in nutrient_elements.items %}
+              <li class="nutrition-item"><p>{{key}} - {{value}}</p></li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

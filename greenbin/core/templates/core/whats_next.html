@@ -1,0 +1,30 @@
+{% extends "base.html" %}{% load static %}{% block title %}What's Next{% endblock %}
+{% block main %}
+<section class="section-hero">
+  <div class="hero">
+    <div class="hero-text-box">
+      <h1 class="heading-primary">
+        A trash bin that can give organic waste a second chance
+      </h1>
+      <p class="hero-description">
+        The smart 365-days-per-year food subscription that will make you eat
+        healthy again. Tailored to your personal tastes and nutritional needs.
+      </p>
+      <a href="#cta" class="btn btn-full margin-right-sm">Start Eating Well</a>
+      <a href="#how" class="btn btn-outline">Learn more</a>
+    </div>
+    <div class="hero-img-box">
+      <div class="hero-container">
+        <div class="hero-image-container">
+          <img
+            src="{% static '/img/whats-next-hero.png' %}"
+            alt="Organic Trash"
+            class="image-before slider-image"
+          />
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

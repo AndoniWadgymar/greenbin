@@ -1,0 +1,79 @@
+{% extends "base.html" %}{% load static %}{% block main %} {% block title%}Trash
+Process: {{trash.id}}{% endblock %}
+<body
+  onload="timer(trashid='{{trash.id}}', duration='{{trash.size}}', startdate='{{trash.start_date_formated}}', mail='{{trash.user.email}}', on_process='{{trash.on_process}}')"
+>
+  <section class="trash-process-section container-vh">
+    {% if trash.on_process %}
+    <div class="process-container">
+      <h1 class="heading-primary center-text">
+        Process Secction for {{trash}}
+      </h1>
+      <div class="trash-process">
+        <div class="hourglass-container">
+          <div class="hourglass"></div>
+        </div>
+        <div class="timer">
+          <div class="block">
+            <div class="hours" id="hours">--</div>
+            <p>Hours</p>
+          </div>
+          <div class="block">
+            <div class="minutes" id="minutes">--</div>
+            <p>Minutes</p>
+          </div>
+          <div class="block">
+            <div class="seconds" id="seconds">--</div>
+            <p>Seconds</p>
+          </div>
+        </div>
+        <div class="process-details">
+          <div class="process-detail">
+            <div class="trash-detail">
+              <ion-icon class="trash-icon" name="calendar"></ion-icon>
+              <div>
+                <label for="start_date">Start Date</label>
+                <p id="start_date">{{ trash.start_date | date:"M d, Y"}}</p>
+              </div>
+            </div>
+            <div class="trash-detail">
+              <ion-icon class="trash-icon" name="time"></ion-icon>
+              <div>
+                <label for="start_time">Start Time</label>
+                <p id="start_time">{{ trash.start_date.time}}</p>
+              </div>
+            </div>
+            <div class="trash-detail">
+              <ion-icon class="trash-icon" name="hourglass"></ion-icon>
+              <div>
+                <label for="duration">Duration</label>
+                <p id="duration">{{ trash.duration }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="process-details-foods scroll">
+            {% for food in trash.foods.all %}
+            <div class="not-allowed-item">
+              <img
+                class="not-allowed-food-img"
+                src="{{food.image.url}}"
+                alt="Food Image"
+              />
+              <p class="not-allowed-food-txt">{{food.name}}</p>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+    {% else %}
+    <div class="process-container center-text">
+      <h1 class="heading-primary center-text">
+        Process Secction for {{trash}}
+      </h1>
+      <p class="process-complete">PROCESS COMPLETED</p>
+    </div>
+    {% endif %}
+  </section>
+</body>
+{% endblock %}

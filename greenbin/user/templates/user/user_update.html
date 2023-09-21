@@ -1,0 +1,12 @@
+{% extends "user/user_base.html" %}{% load static %}{% block content %}
+<section class="user-section container-vh">
+    <div class="edit-profile-container">
+        <h1>Update your profile</h1>
+        <form class="edit-profile center-text" method="POST" enctype="multipart/form-data">
+          {% csrf_token %} {{ user_form.as_div}}{{ profile_form.as_div}}
+          <input class="btn btn-edit-profile" type="submit" value="Update" />
+        </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

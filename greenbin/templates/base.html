@@ -1,0 +1,178 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Rubik:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/general.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/queries.css' %}" />
+    <link rel="icon" href="img/favicon.png" />
+    <link rel="apple-touch-icon" href="img/apple-touch-icon.png" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+    <script
+      defer
+      src="https://unpkg.com/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js"
+    ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="{% static 'designer/js/jquery.cookie.js' %}"></script>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script type="text/javascript">
+      window.CSRF_TOKEN = "{{ csrf_token }}";
+    </script>
+    <script defer src="{% static 'js/script.js' %}"></script>
+    <title>{% block title %}{% endblock %} | Greenbin</title>
+  </head>
+  <body>
+    <header class="header">
+      <a href="#">
+        <img
+          class="logo"
+          alt="Greenbin logo"
+          src="{% static 'img/greenbin-logo.png' %}"
+        />
+      </a>
+      <nav class="main-nav">
+        <ul class="main-nav-list">
+          {% if user.is_authenticated %}
+          <li>
+            <a class="main-nav-link" href="{% url 'trash:home' %}">Home</a>
+          </li>
+          <li>
+            <a class="main-nav-link" href="{% url 'trash:all' %}">My trash</a>
+          </li>
+          <li>
+            <a class="main-nav-link" href="{% url 'user:profile' %}"
+              >My profile</a
+            >
+          </li>
+          <li>
+            <a class="main-nav-link" href="{% url 'food:foods' %}">Foods</a>
+          </li>
+          <li>
+            <a class="main-nav-link" href="{% url 'core:whatsnext' %}"
+              >Whats next</a
+            >
+          </li>
+          <li>
+            <a class="main-nav-link nav-cta" href="{% url 'core:logout' %}"
+              >Log Out</a
+            >
+          </li>
+          {% else %}
+          <li><a class="main-nav-link" href="#what">¿Qué es Greenbin?</a></li>
+          <li><a class="main-nav-link" href="#how">¿Cómo funciona?</a></li>
+          <li><a class="main-nav-link" href="#impact">Impacto</a></li>
+          <li>
+            <a class="main-nav-link" href="#testimonials">Testimonios</a>
+          </li>
+          <li><a class="main-nav-link" href="#cta">Conoce más</a></li>
+          <li>
+            <a class="main-nav-link nav-cta" href="{% url 'core:login' %}"
+              >Log In</a
+            >
+          </li>
+          <li>
+            <a class="main-nav-link nav-cta" href="{% url 'core:signup' %}"
+              >Sign Up</a
+            >
+          </li>
+          {% endif %}
+        </ul>
+      </nav>
+
+      <button class="btn-mobile-nav">
+        <ion-icon class="icon-mobile-nav" name="menu-outline"></ion-icon>
+        <ion-icon class="icon-mobile-nav" name="close-outline"></ion-icon>
+      </button>
+    </header>
+    <main>{% block main %}{% endblock %}</main>
+    <footer class="footer">
+      <div class="container grid grid--footer">
+        <div class="logo-col">
+          <a href="#" class="footer-logo">
+            <img
+              class="logo logo-foot"
+              alt="OmniFood logo"
+              src="{% static 'img/greenbin-logo.png' %}"
+            />
+          </a>
+          <ul class="social-links">
+            <li>
+              <a class="footer-link" href="#"
+                ><ion-icon class="social-icon" name="logo-instagram"></ion-icon
+              ></a>
+            </li>
+            <li>
+              <a class="footer-link" href="#"
+                ><ion-icon class="social-icon" name="logo-facebook"></ion-icon
+              ></a>
+            </li>
+            <li>
+              <a class="footer-link" href="#"
+                ><ion-icon class="social-icon" name="logo-twitter"></ion-icon
+              ></a>
+            </li>
+          </ul>
+          <p class="copyright">
+            Copyright &copy; <span class="year">2099</span> by Greenbin, Inc.
+            All rights reserved
+          </p>
+        </div>
+        <div class="address-col">
+          <p class="footer-heading">Contactanos</p>
+          <address class="contacts">
+            <p class="address">
+              Address: 623 Harrison St., 2nd Floor, San Francisco, CA 94107
+            </p>
+            <a class="footer-link" href="tel:415-201-6370">415-201-6370</a>
+            <br />
+            <a class="footer-link" href="mailto:mail@example.com"
+              >greenbin@gmail.com</a
+            >
+          </address>
+        </div>
+        <div class="nav-col">
+          <p class="footer-heading">Cuenta</p>
+          <ul class="footer-nav">
+            <li><a class="footer-link" href="#">Crea una cuentra</a></li>
+            <li><a class="footer-link" href="#">Sign in</a></li>
+            <li><a class="footer-link" href="#">iOS app</a></li>
+            <li><a class="footer-link" href="#">Android app</a></li>
+          </ul>
+        </div>
+        <div class="nav-col">
+          <p class="footer-heading">Compañia</p>
+          <ul class="footer-nav">
+            <li><a class="footer-link" href="#">Sobre Greenbin</a></li>
+            <li><a class="footer-link" href="#">Socios Granjas </a></li>
+            <li><a class="footer-link" href="#">Carreras </a></li>
+          </ul>
+        </div>
+        <div class="nav-col">
+          <p class="footer-heading">Referencias</p>
+          <ul class="footer-nav">
+            <li><a class="footer-link" href="#">Directorio comida</a></li>
+            <li><a class="footer-link" href="#">Centro de ayuda</a></li>
+            <li><a class="footer-link" href="#">Terminos & Privacidad</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,495 @@
+{% extends "base.html" %}{% load static %}{% block title %}Welcome{% endblock %}
+{% block main %}
+<section class="section-hero">
+  <div class="hero">
+    <div class="hero-text-box">
+      <h1 class="heading-primary">
+        GreenBin: Transformando la Basura hacia un Futuro Sostenible!
+      </h1>
+      <p class="hero-description">
+        En un mundo donde la responsabilidad ambiental es más crucial que nunca,
+        estamos orgullosos de presentar GreenBin, la solución definitiva para la
+        gestión de basura orgánica. GreenBin no es solo un bote de basura; es un
+        sistema revolucionario que te empodera para tener un impacto positivo en
+        el medio ambiente como nunca antes, todo desde la comodidad de tu
+        teléfono.
+      </p>
+      <a href="#cta" class="btn btn-full margin-right-sm"
+        >Recibe más información</a
+      >
+      <a href="#how" class="btn btn-outline">Conocé más</a>
+      <div class="delivered-meals">
+        <div class="delivered-img">
+          <img
+            src="{% static 'img/customers/customer-1.jpg' %}"
+            alt="Customer Photo"
+          />
+          <img
+            src="{% static 'img/customers/customer-2.jpg' %}"
+            alt="Customer Photo"
+          />
+          <img
+            src="{% static 'img/customers/customer-3.jpg' %}"
+            alt="Customer Photo"
+          />
+          <img
+            src="{% static 'img/customers/customer-4.jpg' %}"
+            alt="Customer Photo"
+          />
+          <img
+            src="{% static 'img/customers/customer-5.jpg' %}"
+            alt="Customer Photo"
+          />
+          <img
+            src="{% static 'img/customers/customer-6.jpg' %}"
+            alt="Customer Photo"
+          />
+        </div>
+        <p class="delivered-text"><span>250,000+ </span>vidas cambiadas!</p>
+      </div>
+    </div>
+    <div class="hero-img-box">
+      <div class="hero-container">
+        <div class="hero-image-container">
+          <img
+            src="{% static 'img/organic-trash-hero.jpg' %}"
+            alt="Organic Trash"
+            class="image-before slider-image"
+          /><img
+            src="{% static 'img/compost-hero.jpg' %}"
+            alt="Organic Trash"
+            class="image-after slider-image"
+          />
+        </div>
+        <input
+          type="range"
+          min="0"
+          max="100"
+          value="50"
+          class="slider"
+          aria-label="percentage of before photo"
+        />
+        <div class="slider-line"></div>
+        <div class="slider-button" aria-hidden="true">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="25"
+            height="25"
+            fill="#333"
+            viewBox="0 0 256 256"
+          >
+            <path
+              d="M136,40V216a8,8,0,0,1-16,0V40a8,8,0,0,1,16,0ZM96,120H35.31l18.35-18.34A8,8,0,0,0,42.34,90.34l-32,32a8,8,0,0,0,0,11.32l32,32a8,8,0,0,0,11.32-11.32L35.31,136H96a8,8,0,0,0,0-16Zm149.66,2.34-32-32a8,8,0,0,0-11.32,11.32L220.69,120H160a8,8,0,0,0,0,16h60.69l-18.35,18.34a8,8,0,0,0,11.32,11.32l32-32A8,8,0,0,0,245.66,122.34Z"
+            ></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Featured in section -->
+<!-- ################### -->
+<section class="section-featured">
+  <div class="container">
+    <h2 class="heading-fetured-in">Como se muestra en</h2>
+    <div class="logos">
+      <img
+        src="{% static 'img/logos/techcrunch.png' %}"
+        alt="Techcrunch Logo"
+      />
+      <img
+        src="{% static 'img/logos/business-insider.png' %}"
+        alt="Business Insider Logo"
+      />
+      <img
+        src="{% static 'img/logos/the-new-york-times.png' %}"
+        alt="New York Times Logo"
+      />
+      <img src="{% static 'img/logos/forbes.png' %}" alt="Forbes Logo" />
+      <img src="{% static 'img/logos/usa-today.png' %}" alt="USA Today Logo" />
+    </div>
+  </div>
+</section>
+<!-- How it works section -->
+<!-- ################### -->
+<section class="section-what" id="what">
+  <div class="what-container">
+    <h2 class="heading-secondary heading-mb-half center-text">
+      ¿Qué es Greenbin?
+    </h2>
+    <div class="what-text-box">
+      <ol class="what-description">
+        <li class="what-description-item">
+          <strong> Gestión de Residuos Inteligente:</strong> Greenbin no se
+          limita a recolectar basura. Es un sistema de gestión de residuos
+          inteligente que te brinda un control total desde tu smartphone.
+          Olvídate de los métodos tradicionales de eliminación de residuos.
+        </li>
+        <li class="what-description-item">
+          <strong>Transformación de Residuos Orgánicos:</strong> Con GreenBin,
+          la basura orgánica ya no es un problema. Nuestra tecnología de
+          vanguardia convierte estos residuos en productos reutilizables y
+          valiosos, reduciendo la presión sobre nuestros recursos naturales.
+        </li>
+        <li class="what-description-item">
+          <strong>Innovación Sostenible:</strong> Únete al movimiento hacia un
+          futuro más ecológico. GreenBin utiliza la tecnología para minimizar la
+          generación de residuos y promover prácticas más sostenibles en la
+          gestión de residuos.
+        </li>
+        <li class="what-description-item">
+          <strong>Control desde la Aplicación:</strong> La aplicación GreenBin
+          te ofrece un control completo. Programa recogidas, sigue el proceso de
+          transformación y recibe notificaciones cuando los productos
+          reutilizables estén listos para ser aprovechados.
+        </li>
+        <li class="what-description-item">
+          <strong>Vida Sostenible:</strong> GreenBin no es solo un producto;
+          representa un estilo de vida comprometido con la sostenibilidad. Al
+          usar GreenBin, contribuyes a un mundo más limpio y respetuoso con el
+          medio ambiente.
+        </li>
+      </ol>
+    </div>
+    <div class="what-resume">
+      <div class="container grid grid--4-cols center-text">
+        <div class="feature">
+          <ion-icon class="feature-icon" name="infinite-outline"></ion-icon>
+          <p class="feature-title">Usos ilimitados</p>
+          <p class="feature-text">Transforma tu basura todos los días</p>
+        </div>
+
+        <div class="feature">
+          <ion-icon class="feature-icon" name="nutrition-outline"></ion-icon>
+          <p class="feature-title">Todo cuenta</p>
+          <p class="feature-text">
+            Mientras sea orgánico puede ser reutilizado
+          </p>
+        </div>
+        <div class="feature">
+          <ion-icon class="feature-icon" name="leaf-outline"></ion-icon>
+          <p class="feature-title">No desperdicio</p>
+          <p class="feature-text">Cambia la manera en la que produces basura</p>
+        </div>
+        <div class="feature">
+          <ion-icon class="feature-icon" name="earth-outline"></ion-icon>
+          <p class="feature-title">Salva el planeta</p>
+          <p class="feature-text">
+            Ayuda a hacer el cambio que el planeta necesita
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- How it works section -->
+<!-- ################### -->
+<section class="section-how" id="how">
+  <div class="container">
+    <span class="subheading">¿Cómo funciona?</span>
+    <h2 class="heading-secondary">Tranforma tu basura en 3 simples pasos</h2>
+    <div class="container grid grid--2-cols grid--center-v grid-steps">
+      <!-- STEP 01 -->
+      <div class="step-text-box">
+        <p class="step-number">01</p>
+        <h3 class="heading-tertiary">Ingresa la información de tu proceso</h3>
+        <p class="step-description">
+          Primero elecciona el tamaño de tu basura, ya sea específica o general.
+          Despues ingresa un tiempo o utiliza el que nosotros proponemos. Por
+          ultimo selecciona los alimentos que pondras en tu proceso y empiezalo.
+        </p>
+      </div>
+      <div class="step-img-box">
+        <img
+          class="step-img"
+          src="{% static 'img/app/Greenbin-Startprocess.png' %}"
+          alt="iPhone app preferences selection screen"
+        />
+      </div>
+
+      <!-- STEP 02 -->
+      <div class="step-img-box">
+        <img
+          class="step-img"
+          src="{% static 'img/app/Greenbin-Trashprocess.png' %}"
+          alt="iPhone app preferences selection screen"
+        />
+      </div>
+      <div class="step-text-box">
+        <p class="step-number">02</p>
+        <h3 class="heading-tertiary">Monitorea el proceso de tu basura</h3>
+        <p class="step-description">
+          Sigue el tiempo restante de tu proceso con la app o desde cualquier
+          dispositivo conectado a internet a traves de tu navegador.
+        </p>
+      </div>
+      <!-- STEP 03 -->
+      <div class="step-text-box">
+        <p class="step-number">03</p>
+        <h3 class="heading-tertiary">
+          Una vez terminado el proceso podras ver el resumen!
+        </h3>
+        <p class="step-description">
+          Al terminar tu proceso podras ver una notificación en tu corre y
+          podras checar el resumen de tu proceso. Si necesitas saber más
+          información de que hacer con tu basura puedes ver la sección "¿Qué
+          sigue?"
+        </p>
+      </div>
+      <div class="step-img-box">
+        <img
+          class="step-img"
+          src="{% static 'img/app/Greenbin-process.png' %}"
+          alt="iPhone app preferences selection screen"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section-impact" id="impact">
+  <div class="container center-text">
+    <span class="subheading">Impacto</span>
+    <h2 class="heading-secondary">La basura orgánica afecta nuestro planeta</h2>
+  </div>
+
+  <div class="container-imp grid grid--3-cols margin-bottom-md">
+    <div class="impact">
+      <img
+        class="impact-img"
+        src="{% static 'img/impact/impact-1.jpg' %}"
+        alt="Organic Waste"
+      />
+      <div class="impact-content center-text">
+        <p class="impact-title">Desperdicio de comida</p>
+        <ul class="impact-attributes">
+          <li class="impact-attribute">
+            <span
+              ><strong>40%</strong> de toda la basura producida es desperdiciada
+            </span>
+          </li>
+          <li class="impact-attribute">
+            <span
+              ><strong>1,300 millones</strong> toneladas de comida desperdiciada
+            </span>
+          </li>
+          <li class="impact-attribute">
+            <span><strong>$1 trillon</strong> USD de pérdida económica </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="impact">
+      <img
+        class="impact-img"
+        src="{% static 'img/impact/impact-2.jpg' %}"
+        alt="Waste Landfill"
+      />
+      <div class="impact-content center-text">
+        <p class="impact-title">Gases de Invernadero</p>
+        <ul class="impact-attributes">
+          <li class="impact-attribute">
+            <span
+              >Basura organica produce de<strong> 6-8% </strong>de la totalidad
+              de gases de invernadero.
+            </span>
+          </li>
+          <li class="impact-attribute">
+            <span><strong>Metano</strong> contamina más que el CO2 </span>
+          </li>
+          <li class="impact-attribute">
+            <span
+              ><strong>16-20%</strong> del metano producido globalmente es por
+              la basura orgánica
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="impact">
+      <img
+        class="impact-img"
+        src="{% static 'img/impact/impact-3.jpg' %}"
+        alt="Waste Landfill"
+      />
+      <div class="impact-content center-text">
+        <p class="impact-title">Calentamiento Global</p>
+        <ul class="impact-attributes">
+          <li class="impact-attribute">
+            <span
+              ><strong>1.2°C</strong> aumento de la temperatura superficie media
+              mundial
+            </span>
+          </li>
+          <li class="impact-attribute">
+            <span
+              ><strong>20 cm</strong> aumento del nivel global del mar en el
+              siglo pasado
+            </span>
+          </li>
+          <li class="impact-attribute">
+            <span
+              ><strong>2050</strong> año que muchos países deberían alcanzar
+              emisiones netas cero</span
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section-testimonials">
+  <div class="testimonials-container">
+    <div class="container center-text">
+      <span class="subheading">Testimonios</span>
+      <h2 class="heading-secondary">Opiniones de usuarios de Greenbin</h2>
+    </div>
+    <div class="testimonial">
+      <div class="testimonial-text">
+        <div class="user-text active-text">
+          <ion-icon
+            class="testimonial-icon"
+            name="chatbubbles-outline"
+          ></ion-icon>
+          <p>
+            "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolores
+            consectetur sunt quisquam explicabo suscipit. Dolorum earum,
+            blanditiis ea maiores at ex laudantium repellendus quidem nesciunt
+            animi sequi nam hic facilis."
+          </p>
+          <span>Usuario1</span>
+        </div>
+        <div class="user-text">
+          <ion-icon
+            class="testimonial-icon"
+            name="chatbubbles-outline"
+          ></ion-icon>
+          <p>
+            "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Culpa
+            explicabo ad repellendus. Facere molestiae quaerat architecto iste
+            est laboriosam modi nemo dolore consequatur ipsum tenetur beatae,
+            dicta voluptate reiciendis error."
+          </p>
+          <span>Usuario2</span>
+        </div>
+        <div class="user-text">
+          <ion-icon
+            class="testimonial-icon"
+            name="chatbubbles-outline"
+          ></ion-icon>
+          <p>
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati
+            aut excepturi, cupiditate ipsum facilis, nihil nobis rerum, ab cum
+            est alias nesciunt id blanditiis a commodi doloremque quo quasi.
+            Delectus."
+          </p>
+          <span>Usuario3</span>
+        </div>
+        <div class="user-text">
+          <ion-icon
+            class="testimonial-icon"
+            name="chatbubbles-outline"
+          ></ion-icon>
+          <p>
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora
+            magnam quam doloribus rerum odit excepturi eos cumque provident
+            maiores! Doloremque aperiam odit vero nostrum assumenda nesciunt
+            tempore deleniti exercitationem deserunt?"
+          </p>
+          <span>Usuario4</span>
+        </div>
+      </div>
+      <div class="testimonial-pic">
+        <img
+          class="user-pic active-pic"
+          src="{% static 'img/customers/dave.jpg' %}"
+          onclick="showReview()"
+          alt="User profilepic"
+        />
+        <img
+          class="user-pic"
+          src="{% static 'img/customers/ben.jpg' %}"
+          onclick="showReview()"
+          alt="User profilepic"
+        />
+        <img
+          class="user-pic"
+          src="{% static 'img/customers/hannah.jpg' %}"
+          onclick="showReview()"
+          alt="User profilepic"
+        />
+        <img
+          class="user-pic"
+          src="{% static 'img/customers/steve.jpg' %}"
+          onclick="showReview()"
+          alt="User profilepic"
+        />
+      </div>
+    </div>
+  </div>
+  <script>
+    let userTexts = document.getElementsByClassName("user-text");
+    let userPics = document.getElementsByClassName("user-pic");
+
+    function showReview() {
+      for (userPic of userPics) {
+        userPic.classList.remove("active-pic");
+      }
+      for (userText of userTexts) {
+        userText.classList.remove("active-text");
+      }
+      let i = Array.from(userPics).indexOf(event.target);
+      userPics[i].classList.add("active-pic");
+      userTexts[i].classList.add("active-text");
+    }
+  </script>
+</section>
+<section class="section-cta" id="cta">
+  <div class="container">
+    <div class="cta">
+      <div class="cta-text-box">
+        <h2 class="heading-secondary">Obten más información!</h2>
+        <p class="cta-text">
+          Tu granito de arena para apoyar el mundo esta a solo un paso. Empieza
+          ha hacer el cambio en tu vida un preceso a la vez y cambia el único
+          mundo que tenemos.
+        </p>
+        <form class="cta-form" name="sign-up" netlify>
+          <div>
+            <label for="full-name">Nombre Completo</label>
+            <input
+              id="full-name"
+              type="text"
+              placeholder="John Smith"
+              name="full-name"
+              required
+            />
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input
+              id="email"
+              type="email"
+              placeholder="mail@example.com"
+              name="email"
+              required
+            />
+          </div>
+          <div>
+            <label for="select-where">Dónde escuchaste sobre nosotros?</label>
+            <select id="select-where" name="select-where" required>
+              <option value="">Elige una opción:</option>
+              <option value="friends">Amigos y Familia</option>
+              <option value="video">YouTube</option>
+              <option value="podcast">Podcast</option>
+              <option value="ad">Facebook ad</option>
+              <option value="others">Otro</option>
+            </select>
+          </div>
+          <button class="btn btn--form">Sign up</button>
+        </form>
+      </div>
+      <div class="cta-img-box" role="img" aria-label="Hands with soil"></div>
+    </div>
+  </div>
+</section>
+{% endblock %}
