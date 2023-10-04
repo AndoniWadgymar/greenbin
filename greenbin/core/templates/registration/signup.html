@@ -5,15 +5,15 @@
   <div class="wrapper">
     <form action="" method="POST">
       {% csrf_token %}
-      <h1>Create your account</h1>
+      <h1>Crea tu cuenta</h1>
       <div class="input-box">
-        <label class="signup-label" for="id_username">Username</label>
+        <label class="signup-label" for="id_username">Usuario</label>
         {{form.username}}
         <ion-icon name="person-add" class="login-icon"></ion-icon>
       </div>
       <div class="full-name">
-        <label class="signup-label" for="id_first_name">First Name</label>
-        <label class="signup-label" for="id_last_name">Last Name</label>
+        <label class="signup-label" for="id_first_name">Nombre</label>
+        <label class="signup-label" for="id_last_name">Apellido</label>
         <div class="input-box">{{form.first_name}}</div>
         <div class="input-box">{{form.last_name}}</div>
       </div>
@@ -23,19 +23,21 @@
         <ion-icon name="mail" class="login-icon"></ion-icon>
       </div>
       <div class="input-box">
-        <label class="signup-label" for="id_password1">Password</label>
+        <label class="signup-label" for="id_password1">Contraseña</label>
         {{form.password1}}
         <ion-icon name="lock-open" class="login-icon"></ion-icon>
       </div>
       <div class="input-box">
-        <label class="signup-label" for="id_password2">Confirm Password</label>
+        <label class="signup-label" for="id_password2"
+          >Confirmar contraseña</label
+        >
         {{form.password2}}
         <ion-icon name="lock-closed" class="login-icon"></ion-icon>
       </div>
-      <button type="submit" class="btn-login">Sign Up</button>
+      <button type="submit" class="btn-login">Crear</button>
       <div class="register-link">
         <p>
-          Already have an account?<a href="{% url 'core:login' %}"> Sign in</a>
+          ¿Ya tienes una cuenta?<a href="{% url 'core:login' %}"> Ingresar</a>
         </p>
       </div>
     </form>

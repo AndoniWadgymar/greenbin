@@ -19,9 +19,9 @@ def home(request):
     past_process = Trash.objects.all().filter(user=request.user)
     profile = request.user.profile
     food_list = Food.objects.all().filter(category=7)
-    current_process_list = Trash.objects.all().filter(user=request.user, on_process=True)
-    if(current_process_list):
-        current_process = True
+    query = Trash.objects.all().filter(user=request.user, on_process=True)
+    if query:
+        current_process = query[0]
     else:
         current_process = False
     if request.method == 'POST' and not current_process:
@@ -48,7 +48,7 @@ def home(request):
                     trash.size = "M"
                 if 350 < trash.user_size:
                     trash.size = "L"
-            
+
             if aux_duration and not aux_size:
                 print("trash user duration inputed")
                 trash.user_duration = timedelta(hours=int(aux_duration.split(":")[0]), minutes=int(aux_duration.split(":")[1]),seconds=int(aux_duration.split(":")[2]))
@@ -59,7 +59,7 @@ def home(request):
                     trash.user_size = 275.00
                 if trash.size == "L":
                     trash.user_size = 425.00
-            
+
             if not aux_duration and aux_size:
                 print("trash user size inputed")
                 trash.user_size = float(aux_size)
@@ -73,7 +73,7 @@ def home(request):
                     trash.size = "L"
                     trash.duration = timedelta(hours=10)
                 trash.user_duration = trash.duration
-            
+
             if not aux_duration and not  aux_size:
                 print("Nothing inputed")
                 if trash.size == "S":
@@ -86,33 +86,32 @@ def home(request):
                     trash.user_size = 425.00
                     trash.duration = timedelta(hours=10)
                 trash.user_duration = trash.duration
-            
+
             trash.end_date = trash.start_date + trash.duration
             trash.processed_size =  trash.user_size * 0.4214
 
             trash.save()
             profile.processes.add(trash)
             form.save_m2m()
-            return redirect('trash:process', pk=trash.id)
+            duration = trash.user_duration
+            seconds = duration.seconds
+            return redirect('trash:process', pk=trash.id, seconds=seconds)
     else:
         form = TrashForm()
 
     return render(request, 'trash/home.html', {'form': form, 'not_foods':food_list, 'past_processes':past_process, 'current_process': current_process},)
 
 @login_required(login_url="/login")
-def process(request, pk):
+def process(request, pk, seconds):
     trash = get_object_or_404(Trash, id=pk, user=request.user)
-    print(trash)
     return render(request, 'trash/trash_process.html', {'trash':trash})
 
 @login_required(login_url="/login")
-def process_completed(request, *args, **kwargs):
-    id = request.POST.get('id')  # Add this line
-    trash = Trash.objects.get(id = id)
+def process_completed(request, pk):
+    trash = get_object_or_404(Trash, id=pk, user=request.user)
     trash.on_process = False
     trash.save()
-
-    return JsonResponse({'status': 200})
+    return render(request, 'trash/trash_process.html', {'trash':trash})
 
 class TrashList(LoginRequiredMixin, ListView):
     model = Trash

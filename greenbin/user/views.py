@@ -19,17 +19,24 @@ def profile(request):
     profile = Profile.objects.get(user=request.user)
     processes_data = []
     processes_date = []
+    filtered = ""
+    if typeg == 'weight':
+        data = "gramos"
+    else:
+        data = "horas"
 
     if filterg == "day":
+        filtered = "hoy"
         processes = profile.processes.all().filter(start_date__day=today.day, start_date__month=today.month, start_date__year=today.year)
         for process in processes:
             if typeg == "duration":
                 processes_data.append(process.duration.seconds/3600)
-            else: 
+            else:
                 processes_data.append(process.user_size)
             processes_date.append(process.start_date)
 
     if filterg == "week":
+        filtered = "semanales"
         # for i in range(0,8):
         #     day = str(datetime.datetime.now() - timedelta(days=i))
         #     print(day[0:10])
@@ -37,7 +44,7 @@ def profile(request):
         #         day_data = profile.processes.all().filter(start_date__day=6).aggregate(total=Sum('duration'))['total']
         #         print(day_data)
         #         if day_data:
-        #             days = day_data.days * 24 
+        #             days = day_data.days * 24
         #             seconds = day_data.seconds /3600
         #             total = days + seconds
         #             day_data = total
@@ -64,11 +71,12 @@ def profile(request):
         processes_date = process_dict.keys()
 
     if filterg == "month":
+        filtered = "mensuales"
         for i in range(0,12):
             if typeg == "duration":
                 month_data = profile.processes.all().filter(start_date__month=i+1).aggregate(total=Sum('duration'))['total']
                 if month_data:
-                    days = month_data.days * 24 
+                    days = month_data.days * 24
                     seconds = month_data.seconds /3600
                     total = days + seconds
                     month_data = total
@@ -76,14 +84,15 @@ def profile(request):
                 month_data = profile.processes.all().filter(start_date__month=i+1).aggregate(total=Sum('user_size'))['total']
             processes_data.append(month_data)
             processes_date.append(calendar.month_name[i+1])
-    
+
     if filterg == "year":
+        filtered = "anuales"
         current_year = int(today.year)
         for i in range(current_year-10,current_year+1):
             if typeg == "duration":
                 year_data = profile.processes.all().filter(start_date__year=i).aggregate(total=Sum('duration'))['total']
                 if year_data:
-                    days = year_data.days * 24 
+                    days = year_data.days * 24
                     seconds = year_data.seconds /3600
                     total = days + seconds
                     year_data = total
@@ -91,10 +100,10 @@ def profile(request):
                 year_data = profile.processes.all().filter(start_date__year=i).aggregate(total=Sum('user_size'))['total']
             processes_data.append(year_data)
             processes_date.append(i)
-    
+
     all_trashes = Trash.objects.all().filter(user=request.user)
     all_foods = [trash.foods.all().values_list('name','category_id') for trash in all_trashes]
-    
+
     food_fruit_dict = {}
     food_vegetable_dict = {}
     food_grain_dict = {}
@@ -136,7 +145,7 @@ def profile(request):
                     food_other_dict[name] +=1
                 else:
                     food_other_dict[name] = 1
-            
+
     food_fruit_data = food_fruit_dict.values()
     food_fruit_name = food_fruit_dict.keys()
     food_vegetable_data = food_vegetable_dict.values()
@@ -150,8 +159,8 @@ def profile(request):
     food_other_data = food_other_dict.values()
     food_other_name = food_other_dict.keys()
 
-    return render(request, 'user/user_detail.html', {'processes_data_list':processes_data, 
-                                                     'processes_date_list':processes_date, 
+    return render(request, 'user/user_detail.html', {'processes_data_list':processes_data,
+                                                     'processes_date_list':processes_date,
                                                      'food_fruit_data_list':food_fruit_data,
                                                      'food_fruit_name_list':food_fruit_name,
                                                      'food_vegetable_data_list':food_vegetable_data,
@@ -162,22 +171,24 @@ def profile(request):
                                                      'food_grain_name_list':food_grain_name,
                                                      'food_protein_data_list':food_protein_data,
                                                      'food_protein_name_list':food_protein_name,
-                                                     'food_other_data_list':food_other_data, 
-                                                     'food_other_name_list':food_other_name,  })
+                                                     'food_other_data_list':food_other_data,
+                                                     'food_other_name_list':food_other_name,
+                                                     'filter': filtered,
+                                                     'data': data})
 
 @login_required(login_url="/login")
 def update_profile(request):
-    
+
     if request.method == "POST":
         user_form = UserUpdateForm(request.POST, instance=request.user)
         profile_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
-        
+
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
             return redirect('user:profile')
-    else:  
+    else:
         user_form = UserUpdateForm(instance=request.user)
         profile_form = ProfileUpdateForm(instance=request.user.profile)
-    
+
     return render(request, 'user/user_update.html',{'user_form':user_form, 'profile_form':profile_form})

@@ -1,28 +1,122 @@
-{% extends "base.html" %}{% load static %}{% block title %}What's Next{% endblock %}
-{% block main %}
-<section class="section-hero">
-  <div class="hero">
-    <div class="hero-text-box">
-      <h1 class="heading-primary">
-        A trash bin that can give organic waste a second chance
-      </h1>
-      <p class="hero-description">
-        The smart 365-days-per-year food subscription that will make you eat
-        healthy again. Tailored to your personal tastes and nutritional needs.
-      </p>
-      <a href="#cta" class="btn btn-full margin-right-sm">Start Eating Well</a>
-      <a href="#how" class="btn btn-outline">Learn more</a>
+{% extends "base.html" %}{% load static %} {% block title %}¿Qué
+sigue?{%endblock %} {% block main %}
+<section class="section-title center-text">
+  <div class="container whats-next">
+    <h1 class="heading-primary">
+      Ahora que tu proceso ha terminado puedes hacer uso de tu producto de
+      distintas maneras!
+    </h1>
+    <p>
+      Algunos de los usos se mostrarán a continuación pero los límites son
+      infinitos, utliizado como mejor lo creas. Por ahora tu granito de arena ya
+      esta cambiando el mundo.
+    </p>
+    <img
+      class="plant-grow"
+      src="{% static 'img/whatsnext/plant-grow.gif' %}"
+      alt="plant growing"
+    />
+  </div>
+</section>
+<section class="section-next-1">
+  <div class="container next-margin">
+    <h1 class="heading-secondary next-heading">Reducción de Basura Orgánica</h1>
+    <hr class="line-divider" />
+    <div class="grid grid--2-cols">
+      <div>
+        <div class="txt-container">
+          <p class="next-txt">
+            Los beneficios que puede tener la reducción del tamaño de basura
+            orgánica se muestran a continuación:
+          </p>
+          <ol>
+            <li class="next-txt">
+              <strong>Ahorro de espacio en vertederos:</strong> La compresión de
+              la basura orgánica en un espacio más pequeño permite un uso más
+              eficiente de los vertederos
+            </li>
+            <li class="next-txt">
+              <strong>Menos emisiones de gases de efecto invernadero:</strong>
+              Al reducir el tamaño de la basura orgánica, se limita la cantidad
+              de metano, un potente gas de efecto invernadero, liberado durante
+              su descomposición en vertederos.
+            </li>
+            <li class="next-txt">
+              <strong>Reducción de olores y plagas: </strong> La compactación y
+              el compostaje adecuados de los residuos orgánicos minimizan la
+              generación de olores desagradables y la atracción de plagas.
+            </li>
+            <li class="next-txt">
+              <strong>Educación y concienciación:</strong> Fomentar el
+              compostaje y la reducción de tamaño de los residuos orgánicos
+              puede servir como una herramienta educativa para la comunidad.
+            </li>
+          </ol>
+        </div>
+      </div>
+      <div class="img-container">
+        <img
+          class="next-img"
+          src="{% static 'img/whatsnext/basura-organica.jpg' %}"
+          alt="manzanda con plastico"
+        />
+      </div>
     </div>
-    <div class="hero-img-box">
-      <div class="hero-container">
-        <div class="hero-image-container">
-          <img
-            src="{% static '/img/whats-next-hero.png' %}"
-            alt="Organic Trash"
-            class="image-before slider-image"
-          />
-        </div>
-        </div>
+  </div>
+  <div class="container next-margin">
+    <h1 class="heading-secondary next-heading align-right">
+      Suplementos para plantas
+    </h1>
+    <hr class="line-divider" />
+    <div class="grid grid--2-cols">
+      <div class="img-container">
+        <img
+          class="next-img"
+          src="{% static 'img/whatsnext/woman-watering.jpeg' %}"
+          alt="manzanda con plastico"
+        />
+      </div>
+      <div>
+        <p class="next-txt txt-container">
+          Dar suplementos a las plantas es una práctica beneficiosa que puede
+          mejorar su salud, rendimiento y calidad. Sin embargo, es importante
+          hacerlo de manera equilibrada y siguiendo las recomendaciones
+          adecuadas para evitar posibles problemas de contaminación del suelo o
+          daño ambiental. La elección de los suplementos debe basarse en un
+          conocimiento sólido de las necesidades específicas de las plantas y
+          del entorno en el que crecen. Varios nutrientes se pueden obtener del
+          producto obtenido despues de procesar la basura orgánica, por lo cual
+          puede cumplir con la función de suplemento en combinación con tierra
+          para brindar los nutrientes para un mayor crecimiento de plantas
+          domésticas.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="container next-margin">
+    <h1 class="heading-secondary next-heading">
+      Suplementos para animales de granja
+    </h1>
+    <hr class="line-divider" />
+    <div class="grid grid--2-cols">
+      <div>
+        <p class="next-txt txt-container">
+          El producto procesado de igual manera puede funcionar como suplementos
+          para animales de granja. Los nutrientes de los alimentos pueden tener
+          una serie de beneficios importantes, que van desde la mejora de la
+          salud y el bienestar animal hasta el aumento de la eficiencia de la
+          producción y la calidad de los productos. Sin embargo, es crucial
+          administrar estos suplementos de manera adecuada y controlada,
+          siguiendo las recomendaciones de expertos en nutrición animal, para
+          evitar problemas de sobrealimentación o desequilibrios nutricionales.
+        </p>
+      </div>
+      <div class="img-container">
+        <img
+          class="next-img"
+          src="{% static 'img/whatsnext/farm.jpeg' %}"
+          alt="manzanda con plastico"
+        />
       </div>
     </div>
   </div>

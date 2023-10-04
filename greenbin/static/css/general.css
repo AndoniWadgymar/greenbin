@@ -215,6 +215,13 @@ body {
   margin: 0 auto;
 }
 
+.container-medium {
+  /* 1140px */
+  max-width: 150rem;
+  padding: 0 3.2rem;
+  margin: 9.6rem auto;
+}
+
 .container-big {
   /* 1140px */
   max-width: 180rem;
@@ -319,4 +326,23 @@ strong {
 
 .grid-steps {
   row-gap: 0;
+}
+
+.next-heading {
+  margin-bottom: 4.8rem;
+}
+
+.align-right {
+  text-align: right;
+}
+.next-margin {
+  margin-top: 9.6rem;
+}
+
+.section-next-1 {
+  margin-bottom: 9.6rem;
+}
+
+.container-height {
+  max-height: 120rem;
 }

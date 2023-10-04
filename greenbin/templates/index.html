@@ -1,5 +1,5 @@
-{% extends "base.html" %}{% load static %}{% block title %}Welcome{% endblock %}
-{% block main %}
+{% extends "base.html" %}{% load static %}{% block title %}Bienvenido
+{%endblock%} {% block main %}
 <section class="section-hero">
   <div class="hero">
     <div class="hero-text-box">
@@ -52,11 +52,11 @@
       <div class="hero-container">
         <div class="hero-image-container">
           <img
-            src="{% static 'img/organic-trash-hero.jpg' %}"
+            src="{% static 'img/landing/organic-trash-hero.jpg' %}"
             alt="Organic Trash"
             class="image-before slider-image"
           /><img
-            src="{% static 'img/compost-hero.jpg' %}"
+            src="{% static 'img/landing/compost-hero.jpg' %}"
             alt="Organic Trash"
             class="image-after slider-image"
           />
@@ -337,7 +337,7 @@
     </div>
   </div>
 </section>
-<section class="section-testimonials">
+<section class="section-testimonials" id="testimonials">
   <div class="testimonials-container">
     <div class="container center-text">
       <span class="subheading">Testimonios</span>

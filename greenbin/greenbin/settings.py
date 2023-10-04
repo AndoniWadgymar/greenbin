@@ -139,3 +139,7 @@ LOGOUT_REDIRECT_URL = "/"
 
 #DATE-INPUT-FORMAT
 DATE_FORMATS = ['mm/dd/yyyy hh:mm:ss']
+
+# SMTP CONFIGURATION
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = BASE_DIR / "sent_emails"

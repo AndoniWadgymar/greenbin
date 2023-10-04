@@ -5,12 +5,12 @@
       {% csrf_token %}
       <p class="food-name-delete center-text">{{food.name}}</p>
       <p class="delete-food-heading">
-        Are you sure you want to delete this item?
+        ¿Quiéres borrar este alimento?
       </p>
       {{ form }}
       <div class="delete-buttons">
-        <input type="submit" value="Confirm" class="btn-confirm" />
-        <a href="/food" class="btn-cancel">Cancel</a>
+        <input type="submit" value="Confirmar" class="btn-confirm" />
+        <a href="/food" class="btn-cancel">Cancelar</a>
       </div>
     </form>
   </div>

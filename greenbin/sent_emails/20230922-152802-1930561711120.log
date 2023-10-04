@@ -1,0 +1,25 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Subject: Password reset on 127.0.0.1:8000
+From: webmaster@localhost
+To: andowii@gmail.com
+Date: Fri, 22 Sep 2023 21:28:02 -0000
+Message-ID: <169541808247.38604.15032791578906297218@LAPTOP-OGET0BSQ>
+
+
+You're receiving this email because you requested a password reset for your user account at 127.0.0.1:8000.
+
+Please go to the following page and choose a new password:
+
+http://127.0.0.1:8000/reset/MQ/buxpmq-d0bfdc0ae831f9a96eef515051f8ecdb/
+
+Your username, in case you’ve forgotten: wadgy
+
+Thanks for using our site!
+
+The 127.0.0.1:8000 team
+
+
+
+-------------------------------------------------------------------------------

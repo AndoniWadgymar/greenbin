@@ -1,30 +1,25 @@
-{% extends "base.html" %}{% load static %}{% block main %} {% block title%}Trash
-Process: {{trash.id}}{% endblock %}
+{% extends "base.html" %}{% load static %} {% block title%}Proceso:
+{{trash.id}}{% endblock %} {% block main %}
 <body
-  onload="timer(trashid='{{trash.id}}', duration='{{trash.size}}', startdate='{{trash.start_date_formated}}', mail='{{trash.user.email}}', on_process='{{trash.on_process}}')"
+  onload="timer(trashid='{{trash.id}}', duration='{{trash.size}}', specific_duration='{{trash.user_duration}}', startdate='{{trash.start_date_formated}}', mail='{{trash.user.email}}', on_process='{{trash.on_process}}')"
 >
   <section class="trash-process-section container-vh">
     {% if trash.on_process %}
     <div class="process-container">
-      <h1 class="heading-primary center-text">
-        Process Secction for {{trash}}
-      </h1>
+      <h1 class="heading-primary center-text">Estatus de Proceso {{trash}}</h1>
       <div class="trash-process">
-        <div class="hourglass-container">
-          <div class="hourglass"></div>
-        </div>
         <div class="timer">
           <div class="block">
             <div class="hours" id="hours">--</div>
-            <p>Hours</p>
+            <p>Horas</p>
           </div>
           <div class="block">
             <div class="minutes" id="minutes">--</div>
-            <p>Minutes</p>
+            <p>Minutos</p>
           </div>
           <div class="block">
             <div class="seconds" id="seconds">--</div>
-            <p>Seconds</p>
+            <p>Segundos</p>
           </div>
         </div>
         <div class="process-details">
@@ -32,21 +27,21 @@ Process: {{trash.id}}{% endblock %}
             <div class="trash-detail">
               <ion-icon class="trash-icon" name="calendar"></ion-icon>
               <div>
-                <label for="start_date">Start Date</label>
+                <label for="start_date">Fecha Inicio</label>
                 <p id="start_date">{{ trash.start_date | date:"M d, Y"}}</p>
               </div>
             </div>
             <div class="trash-detail">
               <ion-icon class="trash-icon" name="time"></ion-icon>
               <div>
-                <label for="start_time">Start Time</label>
+                <label for="start_time">Tiempo Inicio</label>
                 <p id="start_time">{{ trash.start_date.time}}</p>
               </div>
             </div>
             <div class="trash-detail">
               <ion-icon class="trash-icon" name="hourglass"></ion-icon>
               <div>
-                <label for="duration">Duration</label>
+                <label for="duration">Duración</label>
                 <p id="duration">{{ trash.duration }}</p>
               </div>
             </div>
@@ -68,10 +63,8 @@ Process: {{trash.id}}{% endblock %}
     </div>
     {% else %}
     <div class="process-container center-text">
-      <h1 class="heading-primary center-text">
-        Process Secction for {{trash}}
-      </h1>
-      <p class="process-complete">PROCESS COMPLETED</p>
+      <h1 class="heading-primary center-text">Estatus de Proceso {{trash}}</h1>
+      <p class="process-complete">PROCESO COMPLETO</p>
     </div>
     {% endif %}
   </section>

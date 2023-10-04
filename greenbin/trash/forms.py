@@ -8,6 +8,6 @@ class TrashForm(ModelForm):
     class Meta:
         model = Trash
         fields = ['size', 'user_size', 'user_duration', 'foods']
-        widgets = {'user_size' : TextInput(attrs={'placeholder': 'Weight in grams'}),
-            'user_duration': TextInput(attrs={'placeholder': 'Format("HH:mm:ss")'})}
+        widgets = {'user_size' : TextInput(attrs={'placeholder': 'Peso en gramos'}),
+            'user_duration': TextInput(attrs={'placeholder': 'Formato("HH:mm:ss")'})}
 

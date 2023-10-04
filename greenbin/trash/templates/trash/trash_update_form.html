@@ -1,12 +1,13 @@
-{% extends "base.html" %}{% load static %}{% block main %} {% block title%}Trash
-Details: {{trash.id}}{% endblock %}
+{% extends "base.html" %}{% load static %}
+{% block title%}Proceso {{trash.id}}{% endblock %}
+{% block main %}
 <section class="td container-vh">
   <div class="trash-detail-container">
     <div class="wrapper td-wrapper">
-      <h1>Update Trash Process: {{trash.id}}</h1>
+      <h1>Actualizar Proceso de Basura: {{trash.id}}</h1>
       <form class="update-tp" method="post">
-        {% csrf_token %} {{ form.as_div }}
-        <input type="submit" value="Update" />
+        {% csrf_token %} {{ form.as_p }}
+        <input type="submit" value="Actualizar" />
       </form>
     </div>
   </div>

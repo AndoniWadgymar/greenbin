@@ -1,21 +1,22 @@
-{% extends "base.html" %}{% load static %}{% block main %} {% block title%}Trash
-Details: {{trash.id}}{% endblock %}
+{% extends "base.html" %}{% load static %}
+{% block title%}Proceso {{trash.id}}{% endblock %}
+{% block main %}
 <section class="td container-vh">
   <div class="trash-detail-container">
     <div class="wrapper td-wrapper">
-      <h1>Trash Process: {{trash.id}}</h1>
+      <h1>Proceso de Basura: {{trash.id}}</h1>
       <div class="date-container">
         <div class="trash-detail">
           <ion-icon class="trash-icon" name="calendar"></ion-icon>
           <div>
-            <label for="start_date">Start Date</label>
+            <label for="start_date">Fecha Inicio</label>
             <p id="start_date">{{ trash.start_date | date:"M d, Y"}}</p>
           </div>
         </div>
         <div class="trash-detail">
           <ion-icon class="trash-icon" name="time"></ion-icon>
           <div>
-            <label for="start_time">Start Time</label>
+            <label for="start_time">Hora Inicio</label>
             <p id="start_time">{{ trash.start_date.time}}</p>
           </div>
         </div>
@@ -24,14 +25,14 @@ Details: {{trash.id}}{% endblock %}
         <div class="trash-detail">
           <ion-icon class="trash-icon" name="calendar-clear"></ion-icon>
           <div>
-            <label for="end_date">End Date</label>
+            <label for="end_date">Fecha Término</label>
             <p id="end_date">{{ trash.end_date | date:"M d, Y"}}</p>
           </div>
         </div>
         <div class="trash-detail">
           <ion-icon class="trash-icon" name="time"></ion-icon>
           <div>
-            <label for="end_time">End Time</label>
+            <label for="end_time">Hora Término</label>
             <p id="end_time">{{ trash.end_date.time }}</p>
           </div>
         </div>
@@ -39,20 +40,20 @@ Details: {{trash.id}}{% endblock %}
       <div class="trash-detail space-between text-right">
         <ion-icon class="trash-icon" name="hourglass"></ion-icon>
         <div>
-          <label for="duration">Duration</label>
+          <label for="duration">Duración</label>
           <p id="duration">{{ trash.duration }}</p>
         </div>
       </div>
       <div class="trash-detail space-between text-right">
         <ion-icon class="trash-icon" name="trash"></ion-icon>
         <div class="">
-          <label for="size">Size</label>
+          <label for="size">Tamaño</label>
           <p id="size">{{ trash.get_size_display }}</p>
         </div>
       </div>
       <div class="trash-detail fd">
         <div class="food-list">
-          <label for="foods" class="food-list-head">Foods</label>
+          <label for="foods" class="food-list-head">Alimentos</label>
           <ul class="scroll">
             {% for food in trash.foods.all %}
             <li class="food-item" id="foods">{{ food }}</li>
@@ -62,10 +63,10 @@ Details: {{trash.id}}{% endblock %}
       </div>
       <div class="fp-buttons">
         <form action="{% url 'trash:update' trash.id %}">
-          <button class="delete-trash update-trash">Update</button>
+          <button class="delete-trash update-trash">Actualizar</button>
         </form>
         <form action="{% url 'trash:delete' trash.id %}">
-          <button class="delete-trash">Delete</button>
+          <button class="delete-trash">Borrar</button>
         </form>
       </div>
     </div>

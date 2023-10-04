@@ -5,80 +5,89 @@
     <div class="user-information-container center-text">
       <div class="circular--portrait">
         <img
+          class="profile-pic"
           src="{{user.profile.profileimg.url}}"
           alt="{{ user.username }}"
           accept=".jpg,.jpeg,.png"
         />
       </div>
       <div class="user-info">
-        <div>
-          <label>Full Name:</label>
+        <div class="user-name">
+          <label>Nombre</label>
           <p>{{user.first_name}} {{user.last_name}}</p>
         </div>
-        <div>
-          <label>Username:</label>
+        <div class="user-username">
+          <label>Usuario:</label>
           <p>{{user.username}}</p>
         </div>
-        <div>
+        <div class="user-email">
           <label>Email:</label>
           <p>{{user.email}}</p>
         </div>
         {% if user.profile.location %}
-        <div>
-          <label>Location:</label>
+        <div class="user-location">
+          <label>Ubicación:</label>
           <p>{{user.profile.location}}</p>
         </div>
         {% endif %} {% if user.profile.bio %}
-        <div>
+        <div class="user-bio">
           <label>Bio:</label>
           <p style="font-size: 1.8rem">{{user.profile.bio}}</p>
         </div>
         {% endif %}
         <form action="{% url 'user:update'%}">
           <button type="submit" class="btn btn-edit-profile">
-            Edit Profile
+            Editar Perfil
           </button>
         </form>
       </div>
     </div>
     <div class="process-sum-container center-text">
       <p>{{user.profile.processes.count}}</p>
-      <label>Total Processes</label>
+      <label>Procesos Totales</label>
     </div>
     <div class="process-sum-container center-text process-hours">
-      <p>{{user.profile.total_hours}}</p>
-      <label>Total Time</label>
+      <div id="th">
+        <p>{{user.profile.total_hours}}</p>
+      </div>
+      <label>Tiempo Total</label>
     </div>
     <div class="process-sum-container center-text">
       <p>{{user.profile.total_weight | intcomma}}g</p>
-      <label>Total Weight</label>
+      <label>Peso Total</label>
     </div>
 
     <div class="graph-container">
-      <!-- Slideshow container -->
       <div class="slideshow-container">
-        <!-- Full-width images with number and caption text -->
         <div class="mySlides fade">
-          <form method="get" action="{% url 'user:profile' %}">
-            <select name="filter" id="filter">
-              <option value="">Sort graphs by:</option>
-              <option value="day">Day</option>
-              <option value="week">Week</option>
-              <option value="month">Month</option>
-              <option value="year">Year</option>
+          <form
+            method="get"
+            action="{% url 'user:profile' %}"
+            class="filters-profile"
+          >
+            <select class="food-filter" name="filter" id="filter">
+              <option value="">Ordenar por:</option>
+              <option value="day">Día</option>
+              <option value="week">Semana</option>
+              <option value="month">Mes</option>
+              <option value="year">Año</option>
             </select>
-            <select name="type" id="type">
-              <option value="">Get data by:</option>
-              <option value="duration">Duration</option>
-              <option value="weight">Weight</option>
+            <select class="food-filter" name="type" id="type">
+              <option value="">Obtener data por:</option>
+              <option value="duration">Duración</option>
+              <option value="weight">Peso</option>
             </select>
-            <button class="btn-filter">Sort</button>
+            <button class="btn-filter">Obtener</button>
           </form>
-          <div class="first-graph">
-            <h1>Title</h1>
+          <div class="first-graph center-text">
+            <h1>Procesos {{filter}}</h1>
             <canvas id="firstChart"></canvas>
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
             <script>
+              const aux = document.querySelector("#th p").innerText;
+              let txt = aux.replace("day", "día");
+              document.querySelector("#th p").innerText = txt;
+
               const ctx_first = document.getElementById("firstChart");
 
               new Chart(ctx_first, {
@@ -89,11 +98,13 @@
                   ],
                   datasets: [
                     {
-                      label: "#",
+                      label: "{{data}}",
                       data: [
                         {% for data in processes_data_list %}'{{data}}',{% endfor %}
                       ],
                       borderWidth: 1,
+                      borderColor: '#5c715e',
+                      backgroundColor: '#b6cdbd'
                     },
                   ],
                 },
@@ -112,7 +123,9 @@
         <div class="mySlides fade">
           <div class="pie-charts">
             <div>
-              <h1 class="center-text">Fruit Food Usage</h1>
+              <h1 style="font-size: 2rem" class="center-text">
+                Frutas Procesadas
+              </h1>
               <canvas id="firstPieChart"></canvas>
               <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
               <script>
@@ -131,6 +144,7 @@
                                         {% for data in food_fruit_data_list %}'{{data}}',{% endfor %}
                                       ],
                                       borderWidth: 1,
+                                      backgroundColor: ["#B6CDBD", "#7A9B76", "#b6cdbd", "#8A7E72", "#d3e1d7", "#49524c", "#6d7b71", "#373e39", "#317a5a", "#b1d6c6", "#183d2d", "#3d9970", "#ecf5f1", "#111111", "#AAAAAA"],
                                     },
                                   ],
                                 },
@@ -151,7 +165,9 @@
               </script>
             </div>
             <div>
-              <h1 class="center-text">Vegetables Food Usage</h1>
+              <h1 style="font-size: 2rem" class="center-text">
+                Verduras Procesadas
+              </h1>
               <canvas id="secondPieChart"></canvas>
               <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
               <script>
@@ -170,6 +186,7 @@
                                         {% for data in food_vegetable_data_list %}'{{data}}',{% endfor %}
                                       ],
                                       borderWidth: 1,
+                                      backgroundColor: ["#B6CDBD", "#7A9B76", "#b6cdbd", "#8A7E72", "#d3e1d7", "#49524c", "#6d7b71", "#373e39", "#317a5a", "#b1d6c6", "#183d2d", "#3d9970", "#ecf5f1", "#111111", "#AAAAAA"],
                                     },
                                   ],
                                 },
@@ -190,7 +207,9 @@
               </script>
             </div>
             <div>
-              <h1 class="center-text">Dairy Food Usage</h1>
+              <h1 style="font-size: 2rem" class="center-text">
+                Lácteos Procesadas
+              </h1>
               <canvas id="thirdPieChart"></canvas>
               <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
               <script>
@@ -209,6 +228,7 @@
                                         {% for data in food_dairy_data_list %}'{{data}}',{% endfor %}
                                       ],
                                       borderWidth: 1,
+                                      backgroundColor: ["#B6CDBD", "#7A9B76", "#b6cdbd", "#8A7E72", "#d3e1d7", "#49524c", "#6d7b71", "#373e39", "#317a5a", "#b1d6c6", "#183d2d", "#3d9970", "#ecf5f1", "#111111", "#AAAAAA"],
                                     },
                                   ],
                                 },
@@ -229,7 +249,9 @@
               </script>
             </div>
             <div>
-              <h1 class="center-text">Grains Food Usage</h1>
+              <h1 style="font-size: 2rem" class="center-text">
+                Granos Procesados
+              </h1>
               <canvas id="fourthPieChart"></canvas>
               <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
               <script>
@@ -248,6 +270,7 @@
                                         {% for data in food_grain_data_list %}'{{data}}',{% endfor %}
                                       ],
                                       borderWidth: 1,
+                                      backgroundColor: ["#B6CDBD", "#7A9B76", "#b6cdbd", "#8A7E72", "#d3e1d7", "#49524c", "#6d7b71", "#373e39", "#317a5a", "#b1d6c6", "#183d2d", "#3d9970", "#ecf5f1", "#111111", "#AAAAAA"],
                                     },
                                   ],
                                 },
@@ -268,7 +291,9 @@
               </script>
             </div>
             <div>
-              <h1 class="center-text">Protein Food Usage</h1>
+              <h1 style="font-size: 2rem" class="center-text">
+                Proteinas Procesadas
+              </h1>
               <canvas id="fifthPieChart"></canvas>
               <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
               <script>
@@ -287,6 +312,7 @@
                                         {% for data in food_protein_data_list %}'{{data}}',{% endfor %}
                                       ],
                                       borderWidth: 1,
+                                      backgroundColor: ["#B6CDBD", "#7A9B76", "#b6cdbd", "#8A7E72", "#d3e1d7", "#49524c", "#6d7b71", "#373e39", "#317a5a", "#b1d6c6", "#183d2d", "#3d9970", "#ecf5f1", "#111111", "#AAAAAA"],
                                     },
                                   ],
                                 },
@@ -307,7 +333,9 @@
               </script>
             </div>
             <div>
-              <h1 class="center-text">Other Food Usage</h1>
+              <h1 style="font-size: 2rem" class="center-text">
+                Otros Alimentos
+              </h1>
               <canvas id="sixthPieChart"></canvas>
               <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
               <script>
@@ -326,6 +354,7 @@
                                         {% for data in food_other_data_list %}'{{data}}',{% endfor %}
                                       ],
                                       borderWidth: 1,
+                                      backgroundColor: ["#B6CDBD", "#7A9B76", "#b6cdbd", "#8A7E72", "#d3e1d7", "#49524c", "#6d7b71", "#373e39", "#317a5a", "#b1d6c6", "#183d2d", "#3d9970", "#ecf5f1", "#111111", "#AAAAAA"],
                                     },
                                   ],
                                 },

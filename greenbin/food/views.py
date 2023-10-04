@@ -17,9 +17,9 @@ from django.contrib.auth.decorators import user_passes_test
 
 class FoodList(LoginRequiredMixin, ListView):
     login_url = "/login/"
-    redirect_field_name = "redirect_to"    
+    redirect_field_name = "redirect_to"
     model = Food
-    queryset = Food.objects.order_by('name')
+    queryset = Food.objects.order_by('category_id')
     context_object_name = 'foods'
 
     def get_queryset(self):
@@ -29,7 +29,7 @@ class FoodList(LoginRequiredMixin, ListView):
         else:
             new_context = Food.objects.all()
         return new_context
-    
+
 class FoodDetail(LoginRequiredMixin, DetailView):
     model = Food
 
@@ -37,16 +37,16 @@ class FoodDetail(LoginRequiredMixin, DetailView):
         #Get data from view
         context = super(FoodDetail, self).get_context_data(*args, **kwargs)
         # add extra field
-        food = context['object']
+        food = context['food'].name_eng
         API_KEY = 'Dp9XFa8CxLDJZsf0vKxeHN95Lfsen3EFzn62vXpH'
-        
+
         try:
             response = requests.get(f'https://api.nal.usda.gov/fdc/v1/foods/search?api_key={API_KEY}&query={food}&dataType=Foundation&pageSize=1')
             response.raise_for_status()
 
         except requests.exceptions.HTTPError as err:
              raise SystemExit(err)
-        
+
         search_data = response.json()
         fdcid = search_data['foods'][0]['fdcId']
 
@@ -54,7 +54,7 @@ class FoodDetail(LoginRequiredMixin, DetailView):
             response = requests.get(f'https://api.nal.usda.gov/fdc/v1/food/{fdcid}?api_key={API_KEY}')
         except requests.exceptions.HTTPError as err:
              raise SystemExit(err)
-        
+
         especific_data = response.json()
         food_nutrients = especific_data['foodNutrients']
 
@@ -80,14 +80,14 @@ class FoodDetail(LoginRequiredMixin, DetailView):
                 classes.append(food_nut[i])
             else:
                 nutrient_elements.append(food_nut[i])
-        
+
         zippedList = zip(classes, nutrient_elements)
         context["zippedList"] = zippedList
         return context
-    
+
 class FoodCreate(LoginRequiredMixin, CreateView):
     model = Food
-    fields = ['name', 'weight', 'image','category', 'created_by']
+    fields = ['name', 'name_eng', 'weight', 'image','category', 'created_by']
     success_url = "/food/"
 
     def form_valid(self, form):
@@ -95,7 +95,7 @@ class FoodCreate(LoginRequiredMixin, CreateView):
         self.object.user = self.request.user
         self.object.save()
         return super().form_valid(form)
-    
+
     @method_decorator(user_passes_test(lambda u: u.is_superuser))
     def dispatch(self, *args, **kwargs):
         return super().dispatch(*args, **kwargs)

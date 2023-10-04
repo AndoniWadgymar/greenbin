@@ -9,6 +9,6 @@ urlpatterns = [
     path("delete/<int:pk>", views.TrashDelete.as_view(), name="delete"),
     path("update/<int:pk>", views.TrashUpdate.as_view(), name="update"),
     path("all/", views.TrashList.as_view(), name="all" ),
-    path("process/<int:pk>", views.process, name='process'),
-    path("process/completed/", views.process_completed, name="completed")
+    path("process/<int:pk>/<int:seconds>", views.process, name='process'),
+    path("process/<int:pk>/completed/", views.process_completed, name="completed")
 ]

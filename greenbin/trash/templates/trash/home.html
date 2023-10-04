@@ -1,6 +1,8 @@
-{% extends "base.html" %}{% load static %}{% block main %}
+{% extends "base.html" %}{% load static %}{% block title %}Menu Principal
+{%endblock%}{% block main %}
 <section class="section-home container-vh">
-  <div class="home-container">
+  {% if current_process %}
+  <div class="process-active-container">
     <div class="alert hide">
       <ion-icon class="alert-icon" name="alert-circle-outline"></ion-icon>
       <span class="msg"
@@ -11,13 +13,32 @@
         <ion-icon name="close-outline"></ion-icon>
       </div>
     </div>
+    <div class="warning-container center-text">
+      <div class="water"></div>
+      <div class="warning-text">
+        <h1>PROCESO ACTIVO</h1>
+        <p>
+          Actualmente hay un un proceso activo, para empezar uno nuevo se puede
+          cancelar el actual o esperar a que termine para empezar uno nuevo.
+        </p>
+        <a
+          class="btn btn-full"
+          href="{% url 'trash:process' pk=current_process.id seconds=current_process.duration.seconds %}"
+          >Visitar</a
+        >
+      </div>
+    </div>
+  </div>
+
+  {% else %}
+  <div class="home-container">
     <div class="past-process center-text">
-      <h1 class="not-allowed-heading">Past Processes</h1>
+      <h1 class="not-allowed-heading">Procesos Pasados</h1>
       <div class="not-allowed-items">
         <div class="identify">
           <p>ID</p>
-          <p>Size</p>
-          <p>Date</p>
+          <p>Tamaño</p>
+          <p>Fecha</p>
         </div>
         {% for process in past_processes %}
         <a href="{% url 'trash:details' process.id %}">
@@ -34,14 +55,14 @@
       </div>
     </div>
     <div class="start-process center-text">
-      <h1 class="form-process-heading">START PROCESS</h1>
+      <h1 class="form-process-heading">EMPEZAR PROCESO</h1>
       <form method="POST" action="" class="form-process">
         {% csrf_token %} {{form.as_p}}
-        <button type="submit" class="btn btn-start">START</button>
+        <button type="submit" class="btn btn-start">EMPEZAR</button>
       </form>
     </div>
     <div class="not-allowed center-text">
-      <h1 class="not-allowed-heading">Not Allowed Items</h1>
+      <h1 class="not-allowed-heading">No recomendados</h1>
       <div class="not-allowed-items">
         {% for food in not_foods %}
         <div class="not-allowed-item">
@@ -55,9 +76,10 @@
         {% endfor %}
       </div>
     </div>
+    {% endif %}
   </div>
   <script>
-      {% if current_process == True %}
+      {% if current_process %}
         $(".alert").removeClass("hide");
         $(".alert").addClass("show");
         $(".alert").addClass("showAlert");

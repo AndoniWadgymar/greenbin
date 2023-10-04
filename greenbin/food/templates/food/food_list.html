@@ -1,64 +1,41 @@
-{% extends "food/food_base.html" %}{% load static %}{% block content %}
+{% extends "food/food_base.html" %}{% load static %} {% block title%}
+Alimentos{%endblock%} {% block content %}
 <section class="section-food container-vh" id="blur">
   <div class="container center-text">
     <h2 class="heading-secondary heading-food">
-      See all the food residual you can reuse
+      Todos los restos de comida que puedes reutilizar
     </h2>
   </div>
   <div class="filter-content">
     <form method="get" action="{% url 'food:foods' %}">
-      <select name="category" id="category">
-        <option value="">Select an option:</option>
-        <option value="1">Fruits</option>
-        <option value="2">Vegetables</option>
-        <option value="3">Daries</option>
-        <option value="4">Grains</option>
-        <option value="5">Proteins</option>
-        <option value="6">Other</option>
+      <select name="category" id="category" class="food-filter">
+        <option value="" class="option">Seleccióne un filtro:</option>
+        <option value="1">Frutas</option>
+        <option value="2">Verduras</option>
+        <option value="3">Lacteos</option>
+        <option value="4">Granos</option>
+        <option value="5">Proteinas</option>
+        <option value="6">Otros</option>
+        <option value="7">No permitidos</option>
       </select>
-      <button class="btn-filter">Submit</button>
+
+      <button class="btn-filter">Filtrar</button>
     </form>
-    <!-- <div class="dropdown">
-      <input
-        type="text"
-        class="ddt"
-        readonly
-        placeholder="Select an option: "
-      />
-      <div class="option">
-        <div onmouseover="show('Fruits')"><a href=""></a>Fruits</div>
-        <div onmouseover="show('Vegetables')">Vegetables</div>
-        <div onmouseover="show('Daries')">Daries</div>
-        <div onmouseover="show('Grains')">Grains</div>
-        <div onmouseover="show('Proteins')">Proteins</div>
-        <div onmouseover="show('Other')">Other</div>
-      </div>
-    </div>
-    <script>
-      function show(a) {
-        document.querySelector(".ddt").value = a;
-      }
-      let dropdown = document.querySelector(".dropdown");
-      dropdown.addEventListener("click", function () {
-        console.log("click");
-        dropdown.classList.toggle("active");
-      });
-    </script> -->
     <form method="get" action="{% url 'food:foods' %}">
-      <button class="btn-filter">Clear Filters</button>
+      <button class="btn-filter">Borrar Filtros</button>
     </form>
     {% if user.is_superuser %}
     <form action="{% url 'food:create' %}">
-      <button class="btn-filter">Create</button>
+      <button class="btn-filter">Crear</button>
     </form>
     {% endif %}
   </div>
   {% if foods.count == 0 %}
   <div class="container-big grid center-text">
-    <h3 class="heading-tertiary">No items found!</h3>
+    <h3 class="heading-tertiary">No se encontró ningun alimento</h3>
   </div>
   {% else %}
-  <div class="container-big grid grid--5-cols scroll">
+  <div class="container-big grid grid--5-cols container-height scroll">
     {% for food in foods %}
     <div class="food">
       {% if food.image %}
@@ -72,22 +49,23 @@
       {% endif %}
       <div class="food-content center-text">
         <div class="meal-tags">
-          <span class="tag tag--{{ food.category}}">{{ food.category}}</span>
+          <span class="tag tag--{{food.category}}">{{ food.category}}</span>
         </div>
         <p class="food-title">{{food.name}}</p>
         <ul class="food-attributes">
           <li class="food-attribute">
-            <span>Aproximate weight: <strong>{{food.weight}}g</strong> </span>
+            <span>Peso aproximado: <strong>{{food.weight}}g</strong> </span>
           </li>
+          {% if food.category.id != 7 %}
           <li class="food-attribute">
             <form action="{% url 'food:details' food.id %}">
-              <button class="more-info">More Info</button>
+              <button class="more-info">Más información</button>
             </form>
           </li>
-          {% if user.is_superuser %}
+          {% endif %} {% if user.is_superuser %}
           <li class="food-attribute">
             <form action="{% url 'food:delete' food.id %}">
-              <button class="delete-food">Delete</button>
+              <button class="delete-food">Borrar</button>
             </form>
           </li>
           {% endif %}
