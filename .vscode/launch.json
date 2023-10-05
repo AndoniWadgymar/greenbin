@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "name": "Python: Django",
+      "type": "python",
+      "request": "launch",
+      "envFile": "${workspaceFolder}/envs/.env",
+      "program": "C:\\Users\\tabat\\OneDrive\\Desktop\\greenbin\\greenbin\\manage.py",
+      "args": ["runserver"],
+      "django": true,
+      "justMyCode": true
+    }
+  ]
+}
