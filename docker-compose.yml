@@ -1,0 +1,22 @@
+version: "3.9"
+
+networks:
+  greenbin-network:
+    name: greenbin-network
+    driver: bridge
+
+services:
+  greenbin-service:
+    container_name: greenbin-service
+
+    image: greenbin-image:1.0
+
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    networks:
+      - greenbin-network
+
+    ports:
+      - "8000:8000"
