@@ -1,4 +1,4 @@
-from django.http import JsonResponse
+from django.http import HttpResponseNotFound, JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import login_required
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView, DetailView
@@ -143,4 +143,19 @@ class TrashUpdate(LoginRequiredMixin, UpdateView):
     fields = ["end_date","duration","size", "foods"]
     template_name_suffix = "_update_form"
 
-
+def jsonProcess(request):
+    query = Trash.objects.all().filter(on_process=True)
+    if query:
+        print(query)
+        current_process = query[0]
+        duration = current_process.user_duration
+        seconds = duration.seconds
+        print(seconds)
+        data = {
+            'ID': current_process.id,
+            'duration': seconds
+        }
+        response = JsonResponse(data, status=200)
+        return response
+    else:
+        return HttpResponseNotFound("PAGE NOT FOUND")
