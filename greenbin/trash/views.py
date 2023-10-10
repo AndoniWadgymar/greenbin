@@ -38,7 +38,6 @@ def home(request):
             aux_duration = request.POST['user_duration']
 
             if aux_duration and aux_size:
-                print("trash user duration and trash user size inputed")
                 trash.user_size = float(aux_size)
                 trash.user_duration = timedelta(hours=int(aux_duration.split(":")[0]), minutes=int(aux_duration.split(":")[1]),seconds=int(aux_duration.split(":")[2]))
                 trash.duration = trash.user_duration
@@ -50,7 +49,6 @@ def home(request):
                     trash.size = "L"
 
             if aux_duration and not aux_size:
-                print("trash user duration inputed")
                 trash.user_duration = timedelta(hours=int(aux_duration.split(":")[0]), minutes=int(aux_duration.split(":")[1]),seconds=int(aux_duration.split(":")[2]))
                 trash.duration = trash.user_duration
                 if trash.size == "S":
@@ -61,7 +59,6 @@ def home(request):
                     trash.user_size = 425.00
 
             if not aux_duration and aux_size:
-                print("trash user size inputed")
                 trash.user_size = float(aux_size)
                 if trash.user_size < 200:
                     trash.size = "S"
@@ -75,7 +72,6 @@ def home(request):
                 trash.user_duration = trash.duration
 
             if not aux_duration and not  aux_size:
-                print("Nothing inputed")
                 if trash.size == "S":
                     trash.duration = timedelta(hours=6)
                     trash.user_size = 150.00
