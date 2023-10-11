@@ -31,7 +31,7 @@ def home(request):
 
             trash.user = request.user
             trash.on_process = True
-            trash.start_date = datetime.now()
+            trash.start_date = datetime.now() - timedelta(hours=6)
             trash.start_date_formated = datetime.now().strftime(("%m/%d/%Y %H:%M:%S"))
 
             aux_size = request.POST['user_size']
