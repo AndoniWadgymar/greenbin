@@ -51,10 +51,10 @@
           <p id="size">{{ trash.get_size_display }}</p>
         </div>
       </div>
-      <div class="trash-detail fd">
+      <div class="trash-detail fd scroll">
         <div class="food-list">
           <label for="foods" class="food-list-head">Alimentos</label>
-          <ul class="scroll">
+          <ul class="">
             {% for food in trash.foods.all %}
             <li class="food-item" id="foods">{{ food }}</li>
             {% endfor %}
