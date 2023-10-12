@@ -146,10 +146,12 @@ def jsonProcess(request):
         current_process = query[0]
         duration = current_process.user_duration
         seconds = duration.seconds
+        size = current_process.size
         print(seconds)
         data = {
             'ID': current_process.id,
-            'duration': seconds
+            'Duration': seconds,
+            'Size': size,
         }
         response = JsonResponse(data, status=200)
         return response
