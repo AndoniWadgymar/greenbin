@@ -152,7 +152,7 @@ function timeDiff(secondstime, date) {
   let minutes = ("0" + Math.floor((remainingTime / 60) % 60)).slice(-2);
   let hours = ("0" + Math.floor((remainingTime / 3600) % 24)).slice(-2);
 
-  return [hours, minutes, seconds, remainingTime];
+  return [hours-1, minutes, seconds, remainingTime];
 }
 
 function sendEmail(id, startdate, mail) {
