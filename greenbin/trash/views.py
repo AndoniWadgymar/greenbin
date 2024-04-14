@@ -142,12 +142,10 @@ class TrashUpdate(LoginRequiredMixin, UpdateView):
 def jsonProcess(request):
     query = Trash.objects.all().filter(on_process=True)
     if query:
-        print(query)
         current_process = query[0]
         duration = current_process.user_duration
         seconds = duration.seconds
         size = current_process.size
-        print(seconds)
         data = {
             'ID': current_process.id,
             'Duration': seconds,
